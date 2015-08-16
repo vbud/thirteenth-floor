@@ -627,15 +627,37 @@ void Data::Random::acquire(GLfloat* pPosition,
             
         case NBody::eConfigShell://eConfigLua:
         {
-            printf("Hello");
             int loadResult = luaL_loadfilex(gLua,  "/Volumes/SharedTmp/The Thirteenth Floor/Sources/scripts/bang.lua", "rt");
             int callResult;
+            const char* message;
+            int si;
             switch (loadResult) {
                 case LUA_OK:
                     callResult = lua_pcall(gLua, 0, LUA_MULTRET, 0);
-                    if (callResult != LUA_OK) {
-                        std::cout << "Shit nuggets";
+                    switch (callResult) {
+                        case LUA_OK:
+                            std::cout << "Lua script executed sucessfully!" << std::endl;
+                            break;
+                            
+                        case LUA_ERRRUN:
+                            si = lua_gettop(gLua);
+                            message = lua_tolstring(gLua, si, 0);
+                            std::cout << "Lua script failed with error: " << message << std::endl;
+                            
+                            break;
+                            
+                        case LUA_ERRMEM:
+                            std::cout << "Lua script failed: OUT OF MEMORY" << std::endl;
+                            break;
+                            
+                        case LUA_ERRERR:
+                        case LUA_ERRGCMM:
+                        default:
+                            std::cout << "Unhandled lua error type!";
+                            break;
                     }
+
+
                     break;
                 case LUA_ERRSYNTAX:
 
@@ -1109,8 +1131,7 @@ Data::Random::Random(const size_t& nBodies,
     luaopen_math(gLua);
     luaopen_debug(gLua);
     luaopen_os(gLua);
-    //luaopen_universe(gLua);
-    //luaopen_system(gLua);
+    luaopen_package(gLua);
     
     universeScript = new UniverseScript();
     

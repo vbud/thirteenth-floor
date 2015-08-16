@@ -1,12 +1,10 @@
 require ("system")
-
 require ("universe")
+require ("os")
 
-print "die world!!!"
+
 print "hello world!"
-print "die world!!!"
-print "hello world!"
-print "die world!!!"
+
 
 function Joel()
     local j = {

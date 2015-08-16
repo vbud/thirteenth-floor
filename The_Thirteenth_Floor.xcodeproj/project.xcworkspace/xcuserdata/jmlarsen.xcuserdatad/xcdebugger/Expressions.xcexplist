@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "NBody::Simulation::Data::Random::acquire(float*, float*):NBodySimulationRandom.mm">
+      </ContextState>
+      <ContextState
+         contextName = "NBody::Engine::nextDemo():NBodyEngine.mm">
+      </ContextState>
+      <ContextState
+         contextName = "CFIFStreamOpen(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;, CF::IFStream*):CFIFStream.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "pathname.c_str()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NBody::Simulation::Visualizer::toggleRotation():NBodySimulationVisualizer.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "m_Flag[eNBodyIsRotating]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

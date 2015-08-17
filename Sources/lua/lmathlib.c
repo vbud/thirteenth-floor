@@ -27,6 +27,8 @@
 #define PI (l_tg(3.1415926535897932384626433832795))
 #define RADIANS_PER_DEGREE (PI/180.0)
 
+#undef E
+#define E (l_tg(2.718281828459045))
 
 
 static int math_abs (lua_State *L) {
@@ -276,6 +278,8 @@ LUAMOD_API int luaopen_math (lua_State *L) {
   luaL_newlib(L, mathlib);
   lua_pushnumber(L, PI);
   lua_setfield(L, -2, "pi");
+  lua_pushnumber(L, E);
+  lua_setfield(L, -2, "e");
   lua_pushnumber(L, HUGE_VAL);
   lua_setfield(L, -2, "huge");
   return 1;

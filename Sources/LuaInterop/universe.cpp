@@ -98,7 +98,7 @@ int points_index (lua_State* L) {
 int points_newindex (lua_State* L) {
     float** parray = static_cast<float**>(luaL_checkudata(L, 1, "points"));
     int index = luaL_checkint(L, 2);
-    int value = luaL_checkint(L, 3);
+    float value = luaL_checknumber(L, 3);
     (*parray)[index] = value;
     return 0;
 }

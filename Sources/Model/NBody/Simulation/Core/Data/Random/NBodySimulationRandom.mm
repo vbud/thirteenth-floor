@@ -94,6 +94,10 @@ static const GLfloat kBodyCountScale = 1.0f / 32768.0f;
 lua_State* gLua = nullptr;
 UniverseScript* universeScript = nullptr;
 
+float* gPoints;
+float* gVelocities;
+unsigned int gParticleCount;
+
 template<class T>
 T nextRange(T min, T max)
 {
@@ -627,6 +631,11 @@ void Data::Random::acquire(GLfloat* pPosition,
             
         case NBody::eConfigShell://eConfigLua:
         {
+            // set our global points and velocity pointers
+            gPoints = pPosition;
+            gVelocities = pVelocity;
+            gParticleCount = mnBodies;
+            
             int loadResult = luaL_loadfilex(gLua,  "/Volumes/SharedTmp/The Thirteenth Floor/Sources/scripts/bang.lua", "rt");
             int callResult;
             const char* message;
@@ -643,7 +652,6 @@ void Data::Random::acquire(GLfloat* pPosition,
                             si = lua_gettop(gLua);
                             message = lua_tolstring(gLua, si, 0);
                             std::cout << "Lua script failed with error: " << message << std::endl;
-                            
                             break;
                             
                         case LUA_ERRMEM:
@@ -660,7 +668,10 @@ void Data::Random::acquire(GLfloat* pPosition,
 
                     break;
                 case LUA_ERRSYNTAX:
-
+                    si = lua_gettop(gLua);
+                    message = lua_tolstring(gLua, si, 0);
+                    std::cout << "Lua script failed with error: " << message << std::endl;
+                    break;
                     break;
                     
                 case LUA_ERRMEM:
@@ -1124,16 +1135,12 @@ Data::Random::Random(const size_t& nBodies,
 {
     gLua = luaL_newstate();
     
-    luaopen_io(gLua);
-    luaopen_base(gLua);
-    luaopen_table(gLua);
-    luaopen_string(gLua);
-    luaopen_math(gLua);
-    luaopen_debug(gLua);
-    luaopen_os(gLua);
-    luaopen_package(gLua);
+    luaL_openlibs(gLua);
+
     
     universeScript = new UniverseScript();
+    
+    luaopen_array(gLua);
     
     mnBodies   = nBodies;
     mnConfig   = rParams.mnConfig;

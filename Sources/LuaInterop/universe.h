@@ -4,16 +4,10 @@
 struct lua_State;
 
 int luaopen_universe(lua_State* L);
-int luaopen_system(lua_State* L);
 
-int universe_deltaTime(lua_State* L);
-int universe_fps(lua_State* L);
 int universe_particleCount(lua_State* L);
 int universe_scale(lua_State* L);
 int universe_vscale(lua_State* L);
-
-
-int system_user(lua_State* L);
 
 
 // metatable method for handling "points[index]"

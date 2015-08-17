@@ -289,10 +289,8 @@ void Data::Random::makeShell2(GLfloat *pPosition, GLfloat *pVelocity, GLfloat ft
     while(i < mnBodies)
     {
         point = GLM::Vector3::unit();
-        //point = GLM::normalize(point);
         
         GLfloat scalar = nextRange(inner, outer);
-        //std::cout << "scalar: " << scalar << std::endl;
         position = point * scalar;
         
         pPosition[p++] = position.x;

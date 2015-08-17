@@ -94,6 +94,8 @@ static const GLfloat kBodyCountScale = 1.0f / 32768.0f;
 lua_State* gLua = nullptr;
 UniverseScript* universeScript = nullptr;
 
+float gScale;
+float gVScale;
 float* gPoints;
 float* gVelocities;
 unsigned int gParticleCount;
@@ -631,10 +633,12 @@ void Data::Random::acquire(GLfloat* pPosition,
             
         case NBody::eConfigShell://eConfigLua:
         {
-            // set our global points and velocity pointers
+            // set our global points and velocity pointers, etc.
             gPoints = pPosition;
             gVelocities = pVelocity;
             gParticleCount = mnBodies;
+            gScale = m_Scale[0];
+            gVScale = m_Scale[1];
             
             int loadResult = luaL_loadfilex(gLua,  "/Volumes/SharedTmp/The Thirteenth Floor/Sources/scripts/bang.lua", "rt");
             int callResult;

@@ -58,8 +58,6 @@
 #import <Cocoa/Cocoa.h>
 #import <OpenGL/OpenGL.h>
 
-#import "NBodyMeters.h"
-
 #import "NBodySimulationMediator.h"
 #import "NBodySimulationVisualizer.h"
 
@@ -94,7 +92,6 @@ namespace NBody
         void setFrame(const CGRect& rFrame);
         
         void setToReduce(const bool& bReduce);
-        void setUseGPU(const bool& bIsGPUOnly);
         
         void setShowHUD(const bool& bShow);
         void setShowDock(const bool& bShow);
@@ -108,23 +105,19 @@ namespace NBody
 
         void sync(const bool& doSync);
         bool simulators(const GLuint& nBodies);
-        bool hud(const GLsizei& nLength);
         
         void reset(const GLuint& index);
         
         void restart();
 
         void renderStars();
-        void renderMeters();
         void renderDock();
         void renderHUD();
         void render();
 
-        void nextSimulator();
         void nextDemo();
         
         void swapVisualizer();
-        void swapSimulators();
 
     private:
         bool mbWaitingForData;
@@ -132,16 +125,12 @@ namespace NBody
         bool mbShowDock;
         bool mbIsRotating;
         bool mbReduce;
-        bool mbIsGPUOnly;
         
-        Meters *mpMeters;
         
         Simulation::Mediator   *mpMediator;
         Simulation::Visualizer *mpVisualizer;
         Simulation::Params      m_ActiveParams;
         
-        GLuint    mnSimulatorIndex;
-        GLuint    mnSimulatorCount;
         GLuint    mnBodies;
         GLuint    mnActiveDemo;
         GLdouble  mnViewDistance;

@@ -53,8 +53,7 @@
 #import <OpenGL/OpenGL.h>
 
 #import "NBodySimulationTypes.h"
-#import "NBodySimulationDataPacked.h"
-#import "NBodySimulationDataSplit.h"
+
 extern "C" {
 #include "lualib.h"
 #include "lauxlib.h"
@@ -90,13 +89,9 @@ namespace NBody
                 void setParam(const Params& rParams);
 
                 bool operator()(GLfloat *pPosition, GLfloat *pVelocity);
-                bool operator()(Split *pSplit, Packed *pPacked);
             
             private:
-                void copy(Split *pSplit, Packed *pPacked);
-                
                 void acquire(GLfloat *pPosition, GLfloat *pVelocity);
-                void acquire(Split *pSplit, Packed *pPacked);
                 
                 void bang(GLfloat* pPosition, GLfloat* pVelocity, GLfloat ftcscale, GLfloat fvcscale);
                 

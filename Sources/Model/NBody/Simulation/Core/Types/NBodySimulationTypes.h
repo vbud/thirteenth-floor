@@ -52,8 +52,6 @@
 
 #import <OpenGL/OpenGL.h>
 
-#import "HUDButton.h"
-
 #import "NBodyConstants.h"
 
 #ifdef __cplusplus
@@ -77,17 +75,6 @@ namespace NBody
             GLfloat  mnViewDistance;
             Config   mnConfig;
         }; // Params
-        
-        enum Types
-        {
-            eComputeCPUSingle = 0,
-            eComputeCPUMulti,
-            eComputeGPUPrimary,
-            eComputeGPUSecondary,
-            eComputeMax
-        }; // Types
-        
-        typedef HUD::Button::Image Button;
     } // Simulation
 } // NBody
 

@@ -134,31 +134,12 @@ void Visualizer::prespective()
 {
     glMatrixMode(GL_PROJECTION);
     
-    // DEPRECATED gluPerspective():
-    //
-    //    glLoadIdentity();
-    //    gluPerspective(60, (GLfloat)mnWidth / (GLfloat)mnHeight, 0.1, 10000);
-    
     GLU::Perspective(60, m_Frame.width, m_Frame.height, 0.1, 10000);
 } // NBodyPrespective
 
 void Visualizer::lookAt(const GLfloat *pPosition)
 {
     glMatrixMode(GL_MODELVIEW);
-    
-    // DEPRECATED gluLookAt():
-    //
-    //    glLoadIdentity();
-    //
-    //    if(mnActiveDemo == 0 && m_Flag[eNBodyIsEarthView])
-    //    {
-    //        GLfloat *pEye = pPosition + 3472;
-    //        gluLookAt(pEye[0], pEye[1], pEye[2], 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-    //    }
-    //    else
-    //    {
-    //        gluLookAt(-m_Property[eNBodyViewDistance], 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-    //    }
     
     GLM::Vector3 eye;
     GLM::Vector3 center(0.0f, 0.0f, 0.0f);

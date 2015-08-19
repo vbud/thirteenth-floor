@@ -84,8 +84,6 @@ void *NBody::Simulation::simulate(void *arg)
 
 NBody::Simulation::Base::Base(const size_t& nbodies,
                               const NBody::Simulation::Params& params)
-:   m_Pref(20, false),
-    m_Updates(20, false)
 {
     if(nbodies)
     {
@@ -115,9 +113,6 @@ NBody::Simulation::Base::Base(const size_t& nbodies,
         mnMinIndex    = 0;
         mnDeviceCount = 0;
         mnDevices     = 0;
-        
-        mnPref    = 0.0f;
-        mnUpdates = 0.0f;
         
         CF::Query::Hardware hw;
         
@@ -239,13 +234,6 @@ void NBody::Simulation::Base::resetParams(const NBody::Simulation::Params& param
         mnMaxIndex     = mnBodyCount;
         m_ActiveParams = params;
         
-        m_Pref.erase();
-        
-        mnPref = 0;
-        
-        m_Updates.erase();
-        
-        mnUpdates = 0;
         mbReload  = true;
         mnYear    = 2.755e9;
     }
@@ -342,25 +330,11 @@ void NBody::Simulation::Base::run()
             
             pthread_mutex_lock(&m_ClockLock);
             {
-                m_Pref.start();
-                {
-                    step();
-                }
-                m_Pref.stop();
+                step();
             }
             pthread_mutex_unlock(&m_ClockLock);
         }
         pthread_mutex_unlock(&m_RunLock);
-        
-        m_Pref.update(mnDelta);
-        
-        mnPref = m_Pref.persecond();
-        
-        m_Updates.setStart(m_Pref.getStart());
-        m_Updates.setStop(m_Pref.getStop());
-        m_Updates.update();
-        
-        mnUpdates = std::ceil(m_Updates.persecond());
                 
         // normalize for NBody::Scale::kTime at 0.4
         mnYear += kScaleYear * m_ActiveParams.mnTimeStamp;
@@ -374,16 +348,6 @@ void NBody::Simulation::Base::run()
     }
     pthread_mutex_unlock(&m_ClockLock);
 } // run
-
-const GLdouble& NBody::Simulation::Base::performance() const
-{
-    return mnPref;
-} // performance
-
-const GLdouble& NBody::Simulation::Base::updates() const
-{
-    return mnUpdates;
-} // updates
 
 const GLdouble& NBody::Simulation::Base::year() const
 {

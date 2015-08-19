@@ -92,40 +92,6 @@ void NBody::Engine::restart()
 #pragma mark -
 #pragma mark Private - Utilities - Renderers
 
-void NBody::Engine::renderMeters()
-{
-    mpMeters->update();
-    
-    mpMeters->setValue(NBody::eNBodyMeterPerf, mpMediator->performance());
-    mpMeters->setValue(NBody::eNBodyMeterUpdates, mpMediator->updates());
-    
-    mpMeters->setPosition(mnHudPosition);
-    
-    mpMeters->draw();
-} // renderMeters
-
-void NBody::Engine::renderDock()
-{
-    if(mbShowDock)
-    {
-        if (m_DockPt.y <= (GLM::kHalfPi_f - mnDockSpeed))
-        {
-            m_DockPt.y += mnDockSpeed;
-        } // if
-    } // if
-    else if(m_DockPt.y > 0.0f)
-    {
-        m_DockPt.y -= mnDockSpeed;
-    } // else if
-    
-    GLfloat x = -NBody::Button::kWidth * std::sinf(m_DockPt.x);
-    GLfloat y = 100.0f * (std::sinf(m_DockPt.y) - 1.0f);
-    
-    CGPoint position = CGPointMake(x, y);
-    
-    mpMediator->button(true, position, m_ButtonRt);
-} // renderDock
-
 void NBody::Engine::renderStars()
 {
     const GLfloat* pPosition = mpMediator->position();
@@ -138,8 +104,7 @@ void NBody::Engine::renderHUD()
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     {
-        renderMeters();
-        renderDock();
+
     }
     glDisable(GL_BLEND);
 } // renderHUD
@@ -182,22 +147,6 @@ void NBody::Engine::render()
 #pragma mark -
 #pragma mark Private - Utilities - Selection
 
-void NBody::Engine::nextSimulator()
-{
-    mbWaitingForData = true;
-    
-    mnSimulatorIndex++;
-    
-    if(mnSimulatorIndex >= mnSimulatorCount)
-    {
-        mnSimulatorIndex = 0;
-    } // if
-    
-    mpMediator->pause();
-    mpMediator->select(mnSimulatorIndex);
-    mpMediator->reset(m_ActiveParams);
-} // nextSimulator
-
 void NBody::Engine::nextDemo()
 {
     mnActiveDemo = (mnActiveDemo + 1) % NBody::Simulation::Demo::kParamsCount;
@@ -216,15 +165,6 @@ void NBody::Engine::swapVisualizer()
     
     mpVisualizer->reset(mnActiveDemo);
 } // swapVisualizer
-
-void NBody::Engine::swapSimulators()
-{
-    render();
-    
-    nextSimulator();
-    
-    mpVisualizer->reset(mnActiveDemo);
-} // swapSimulators
 
 #pragma mark -
 #pragma mark Private - Utilities - Intervals
@@ -250,33 +190,14 @@ bool NBody::Engine::simulators(const GLuint& nBodies)
 {
     mnBodies = (mbReduce) ? NBody::Bodies::kCount : nBodies;
     
-    mpMediator = new NBody::Simulation::Mediator(m_ActiveParams,mbIsGPUOnly,mnBodies);
+    mpMediator = new NBody::Simulation::Mediator(m_ActiveParams, mnBodies);
     
-    mnSimulatorIndex = 0;
-    mnSimulatorCount = mpMediator->getCount();
     
     mpMediator->reset(m_ActiveParams);
     mpVisualizer->reset(mnActiveDemo);
     
-    return bool(mnSimulatorCount);
+    return mpMediator != nullptr;
 } // NBodyAcquireSimulators
-
-bool NBody::Engine::hud(const GLsizei& nLength)
-{
-    mpMeters = new NBody::Meters(nLength);
-    
-    mpMeters->setSize(NBody::eNBodyMeterFrames, 120);
-    mpMeters->setSize(NBody::eNBodyMeterUpdates, 120);
-    mpMeters->setSize(NBody::eNBodyMeterPerf, 1400);
-    
-    mpMeters->setLabel(NBody::eNBodyMeterFrames, "Frames/sec");
-    mpMeters->setLabel(NBody::eNBodyMeterUpdates, "Updates/sec");
-    mpMeters->setLabel(NBody::eNBodyMeterPerf, "Relative Perf");
-    
-    mpMeters->setFrame(m_FrameSz);
-    
-    return mpMeters->finalize();
-} // NBodyAcquireHUD
 
 #pragma mark -
 #pragma mark Privale - Utilitie - Demo Selection
@@ -303,15 +224,10 @@ NBody::Engine::Engine(const GLfloat& nStarScale,
     
     mbReduce          = false;
     mbShowHUD         = true;
-    mbShowDock        = true;
-    mbIsGPUOnly       = false;
     mbWaitingForData  = true;
     mbIsRotating      = true;
-    mnSimulatorIndex  = 0;
-    mnSimulatorCount  = 0;
     mnActiveDemo      = nActiveDemo;
     m_ActiveParams    = NBody::Simulation::Demo::kParams[mnActiveDemo];
-    mnHudPosition     = mbShowHUD ? GLM::kHalfPi_f : 0.0f;
     mnStarScale       = nStarScale;
     mnDockSpeed       = NBody::Defaults::kSpeed;
     mnViewDistance    = 30.0f;
@@ -330,13 +246,6 @@ NBody::Engine::Engine(const GLfloat& nStarScale,
 
 NBody::Engine::~Engine()
 {
-    if(mpMeters != NULL)
-    {
-        delete mpMeters;
-        
-        mpMeters = NULL;
-    } // if
-    
     if(mpVisualizer != NULL)
     {
         delete mpVisualizer;
@@ -350,9 +259,6 @@ NBody::Engine::~Engine()
         
         mpMediator = NULL;
     } // if
-    
-    mnSimulatorCount = 0;
-    mnSimulatorIndex = 0;
 } // Destructor
 
 #pragma mark -
@@ -378,7 +284,6 @@ bool NBody::Engine::finalize(const GLuint& nBodies)
             mpVisualizer->setRotationChange(NBody::Defaults::kRotationDelta);
             
             bSuccess = simulators(nBodies);
-            bSuccess = bSuccess && hud(NBody::Defaults::kMeterSize);
         } // if
     } // if
     
@@ -413,11 +318,6 @@ void NBody::Engine::resize(const CGRect& rFrame)
         if(mpVisualizer != NULL)
         {
             mpVisualizer->setFrame(m_FrameSz);
-        } // if
-        
-        if(mpMeters != NULL)
-        {
-            mpMeters->setFrame(m_FrameSz);
         } // if
     } // if
 } // Resize
@@ -455,24 +355,8 @@ void NBody::Engine::run(const GLubyte& nCommand)
             setDemo(nCommand);
             break;
             
-        case 'h':
-            mpMeters->toggle();
-            break;
-            
         case 'd':
             mbShowDock = !mbShowDock;
-            break;
-            
-        case 'u':
-            mpMeters->toggle(NBody::eNBodyMeterUpdates);
-            break;
-            
-        case 'f':
-            mpMeters->toggle(NBody::eNBodyMeterFrames);
-            break;
-            
-        case 's':
-            swapSimulators();
             break;
             
         case 'g':
@@ -498,17 +382,7 @@ void NBody::Engine::move(const CGPoint& point)
 void NBody::Engine::click(const GLint& nState,
                           const CGPoint& point)
 {
-    CGPoint pos  = CGPointMake(point.x, m_FrameSz.height - point.y);
-    CGFloat wmax = 0.75f * m_FrameSz.width;
-    CGFloat wmin = 0.5f * NBody::Button::kWidth;
-    
-    if (    (nState == NBody::Mouse::Button::kDown)
-        &&  (pos.y <= (2.0f * NBody::Button::kHeight))
-        &&  (pos.x >= (wmax - wmin))
-        &&  (pos.x <= (wmax + wmin)))
-    {
-        swapSimulators();
-    } // if
+ 
 } // click
 
 void NBody::Engine::scroll(const GLfloat& nDelta)
@@ -546,22 +420,11 @@ void NBody::Engine::setToReduce(const bool& bReduce)
     mbReduce = bReduce;
 } // setToReduce
 
-void NBody::Engine::setUseGPU(const bool& bIsGPUOnly)
-{
-    mbIsGPUOnly = bIsGPUOnly;
-} // setUseGPU
-
 void NBody::Engine::setShowHUD(const bool& bShow)
 {
     mbShowHUD     = bShow;
     mnHudPosition = mbShowHUD ? GLM::kHalfPi_f : 0.0f;
 } // setShowHUD
-
-void NBody::Engine::setShowDock(const bool& bShow)
-{
-    mbShowDock = bShow;
-    m_DockPt.y = mbShowDock ? GLM::kHalfPi_f : 0.0f;
-} // setShowDock
 
 void NBody::Engine::setClearColor(const GLfloat& nColor)
 {

@@ -61,8 +61,6 @@
 
 #import "NBodySimulationTypes.h"
 
-#import "HUDMeterTimer.h"
-
 #ifdef __cplusplus
 
 namespace NBody
@@ -162,11 +160,6 @@ namespace NBody
             pthread_mutex_t     m_ClockLock;
             pthread_mutexattr_t m_ClockAttrib;
             
-            HUD::Meter::Timer   m_Pref;
-            GLdouble            mnPref;
-            
-            HUD::Meter::Timer   m_Updates;
-            GLdouble            mnUpdates;
             
             GLdouble            mnYear;
             GLdouble            mnFreq;

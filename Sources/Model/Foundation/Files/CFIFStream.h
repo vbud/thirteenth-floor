@@ -63,7 +63,7 @@ namespace CF
     
     IFStreamRef IFStreamCreate(const std::string& pathname);
     
-    IFStreamRef IFStreamCreate(CFStringRef pName, CFStringRef pExt);
+    IFStreamRef IFStreamCreate(CFStringRef pName, CFStringRef pExt, std::string* outFullpath = 0);
     
     IFStreamRef IFStreamCreateCopy(const IFStreamRef pStreamSrc);
     
@@ -74,6 +74,8 @@ namespace CF
     bool IFStreamIsValid(const IFStreamRef pStream);
     
     const char* IFStreamGetBuffer(const IFStreamRef pStream);
+    
+    size_t IFStreamGetSize(const IFStreamRef pStream);
 } // CF
 
 #endif

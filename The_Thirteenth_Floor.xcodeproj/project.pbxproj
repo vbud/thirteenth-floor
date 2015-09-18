@@ -48,7 +48,6 @@
 		F8AC9B0418C2FBA0005DC7B3 /* GalaxyIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 366394EA1863A46900BEF119 /* GalaxyIcon.icns */; };
 		F8AC9B0518C2FBA0005DC7B3 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 366394EE1863A4EA00BEF119 /* star.png */; };
 		F8AC9B0618C2FBA0005DC7B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36BE3F4113D6067E00D9C225 /* MainMenu.xib */; };
-		F8AC9B1018C321A1005DC7B3 /* matrix_gpu.ocl in Resources */ = {isa = PBXBuildFile; fileRef = F8AC9B0F18C321A1005DC7B3 /* matrix_gpu.ocl */; };
 		F8FFE4681A7F0807009999F7 /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FFE4071A7F0806009999F7 /* lapi.c */; };
 		F8FFE46A1A7F0807009999F7 /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FFE40A1A7F0807009999F7 /* lauxlib.c */; };
 		F8FFE46C1A7F0807009999F7 /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = F8FFE40D1A7F0807009999F7 /* lbaselib.c */; };
@@ -156,7 +155,6 @@
 		F83C29541B81350B0095C5E6 /* universe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = universe.cpp; path = LuaInterop/universe.cpp; sourceTree = "<group>"; };
 		F83C29571B8136770095C5E6 /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = lua/lua.h; sourceTree = "<group>"; };
 		F8AC9B0A18C2FBA0005DC7B3 /* TheThirteenthFloor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheThirteenthFloor.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8AC9B0F18C321A1005DC7B3 /* matrix_gpu.ocl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = matrix_gpu.ocl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.opencl; };
 		F8F04F1818C2F3AD001F8510 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		F8F04F1918C2F3AD001F8510 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		F8F04F1E18C2F3D9001F8510 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -398,7 +396,6 @@
 			isa = PBXGroup;
 			children = (
 				3663958E1863A72C00BEF119 /* nbody_gpu.ocl */,
-				F8AC9B0F18C321A1005DC7B3 /* matrix_gpu.ocl */,
 			);
 			name = Kernels;
 			path = Sources/Kernels;
@@ -885,7 +882,6 @@
 				F8AC9AFC18C2FBA0005DC7B3 /* nbody.vsh in Resources */,
 				F8AC9AFD18C2FBA0005DC7B3 /* star.fsh in Resources */,
 				F8AC9AFE18C2FBA0005DC7B3 /* star.vsh in Resources */,
-				F8AC9B1018C321A1005DC7B3 /* matrix_gpu.ocl in Resources */,
 				F8AC9B0418C2FBA0005DC7B3 /* GalaxyIcon.icns in Resources */,
 				F8AC9B0518C2FBA0005DC7B3 /* star.png in Resources */,
 				F8AC9B0618C2FBA0005DC7B3 /* MainMenu.xib in Resources */,

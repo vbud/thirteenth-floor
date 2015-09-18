@@ -70,14 +70,6 @@ namespace NBody
     {
         namespace Data
         {
-            struct RadiusRatio
-            {
-                float radius;
-                float ratio;
-            };
-            
-            typedef std::vector<RadiusRatio> LayoutVector;
-            
             class Random
             {
             public:
@@ -85,30 +77,14 @@ namespace NBody
                        const Params& rParams);
                 
                 virtual ~Random();
-                
-                void setParam(const Params& rParams);
 
                 bool operator()(GLfloat *pPosition, GLfloat *pVelocity);
             
             private:
                 void acquire(GLfloat *pPosition, GLfloat *pVelocity);
                 
-                void bang(GLfloat* pPosition, GLfloat* pVelocity, GLfloat ftcscale, GLfloat fvcscale);
-                
-                void makeShell(GLfloat *pPosition, GLfloat *pVelocity, GLfloat ftcscale, GLfloat fvcscale);
-                
-                void makeShell2(GLfloat *pPosition, GLfloat *pVelocity, GLfloat ftcscale, GLfloat fvcscale);
-                
-                void makeLayeredShells(GLfloat *pPosition, GLfloat *pVelocity, GLfloat ftcscale, GLfloat fvcscale);
-                
-                void makeLayeredShells2(GLfloat *pPosition, GLfloat *pVelocity, GLfloat ftcscale, GLfloat fvcscale);
-                
-                void makeSphereNest(GLfloat *pPosition, GLfloat *pVelocity, GLfloat ftcscale, GLfloat fvcscale, LayoutVector& layout, unsigned short entropy);
-                
             private:
                 size_t   mnBodies;
-                Config   mnConfig;
-                GLfloat  m_Scale[2];
             }; // Random
         } // Data
     } // Simulation

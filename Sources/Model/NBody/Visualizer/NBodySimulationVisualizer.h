@@ -92,8 +92,6 @@ namespace NBody
             void setRotationChange(const GLfloat& nDelta);
             void setRotationSpeed(const GLfloat& nSpeed);
             
-            void setTimeScale(const GLfloat& nScale);
-            
             void setStarSize(const GLfloat& nSize);
             void setStarScale(const GLfloat& nScale);
             

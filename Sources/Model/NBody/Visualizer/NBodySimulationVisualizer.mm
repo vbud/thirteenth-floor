@@ -88,7 +88,6 @@ enum NBodyVisualizerProperties
 {
     eNBodyStarSize = 0,
     eNBodyStarScale,
-    eNBodyTimeScale,
     eNBodyRotationSpeed,
     eNBodyRotationDelta,
     eNBodyViewTime,
@@ -258,8 +257,8 @@ void Visualizer::render(const GLfloat *pPosition)
                     {
                         const GLfloat rotFactor = 1.0f - 0.5f * (1.0f + std::cosf(m_Property[eNBodyRotationSpeed]));
                         
-                        m_Rotation.x += 1.6f * m_Property[eNBodyTimeScale] * rotFactor;
-                        m_Rotation.y += 0.8f * m_Property[eNBodyTimeScale] * rotFactor;
+                        m_Rotation.x += 1.6f * rotFactor;
+                        m_Rotation.y += 0.8f * rotFactor;
                     } // if
                     
                     if((mnActiveDemo != 0) || !m_Flag[eNBodyIsEarthView])
@@ -529,7 +528,6 @@ Visualizer::Visualizer(const GLuint& nBodies)
         m_Property[eNBodyRotationDelta] = NBody::Defaults::kRotationDelta;
         m_Property[eNBodyViewDistance]  = NBody::Defaults::kViewDistance;
         m_Property[eNBodyViewZoomSpeed] = NBody::Defaults::kScrollZoomSpeed;
-        m_Property[eNBodyTimeScale]     = NBody::Scale::kTime;
         m_Property[eNBodyStarScale]     = NBody::Star::kScale;
         m_Property[eNBodyStarSize]      = NBody::Star::kSize * m_Property[eNBodyStarScale];
         m_Property[eNBodyRotationSpeed] = 0.0f;
@@ -729,11 +727,6 @@ void Visualizer::setStarSize(const GLfloat& nSize)
         m_Property[eNBodyStarSize]  = m_Property[eNBodyStarScale] * nSize;
     } // if
 } // setStarSize
-
-void Visualizer::setTimeScale(const GLfloat& nScale)
-{
-    m_Property[eNBodyTimeScale] = nScale;
-} // setTimeScale
 
 void Visualizer::setViewDistance(const GLfloat& nDelta)
 {

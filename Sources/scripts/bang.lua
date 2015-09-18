@@ -75,8 +75,8 @@ end
 local points = points()
 local velocities = velocities()
 local totalcount = universe.particleCount()
-local scale  = universe.scale();
-local vscale = universe.vscale();
+local scale  = 1.0
+local vscale = 1.0
 
 
 local universe1 = {

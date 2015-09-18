@@ -12,8 +12,6 @@ extern "C"
 extern lua_State* gLua;
 extern float* gPoints;
 extern float* gVelocities;
-extern float gScale;
-extern float gVScale;
 extern unsigned int gParticleCount;
 
 static const luaL_Reg CoreLibs[] = {
@@ -23,8 +21,6 @@ static const luaL_Reg CoreLibs[] = {
 
 static const luaL_Reg UniverseLibs[] = {
     {"particleCount", universe_particleCount},
-    {"scale",         universe_scale},
-    {"vscale",        universe_vscale},
     {NULL, NULL}
 };
 
@@ -38,29 +34,6 @@ int universe_particleCount(lua_State* L) {
     lua_pushnumber(L, gParticleCount);
     return 1;
 }
-
-int universe_scale(lua_State* L) {
-    int num_args = lua_gettop(L);
-    if (num_args > 0)
-    {
-        lua_pushstring(L, "too many arguments for universe.scale()");
-        lua_error(L);
-    }
-    lua_pushnumber(L, gScale);
-    return 1;
-}
-
-int universe_vscale(lua_State* L) {
-    int num_args = lua_gettop(L);
-    if (num_args > 0)
-    {
-        lua_pushstring(L, "too many arguments for universe.vscale()");
-        lua_error(L);
-    }
-    lua_pushnumber(L, gVScale);
-    return 1;
-}
-
 
 int luaopen_universe(lua_State* L)
 {

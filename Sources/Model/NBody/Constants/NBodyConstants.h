@@ -78,12 +78,7 @@ namespace NBody
         const GLfloat kHeight  = 48.0f;
         const GLfloat kSpacing = 32.0f;
     }; // Button
-    
-    namespace Scale
-    {
-        const GLfloat kTime      = 0.4f;
-        const GLfloat kSoftening = 1.0f;
-    }; // Scale
+
     
     namespace Window
     {
@@ -93,9 +88,7 @@ namespace NBody
 
     namespace Bodies
     {
-        //const GLuint  kCountMax = 16384;
-        //const GLuint  kCountMin = kCountMax / 4;
-        const GLuint  kCount  = 16384;//32768;//65536;//kCountMax;
+        const GLuint  kCount  = 65536;//16384;//32768;//65536;//kCountMax;
     }; // Defaults
 
     namespace Star
@@ -113,15 +106,6 @@ namespace NBody
         const GLuint  kMeterSize       = 300;
     }; // Defaults
     
-    enum Config
-    {
-        eConfigRandom = 0,
-        eConfigShell,
-        eConfigExpand,
-        eConfigMWM31,
-        eConfigLua,
-        eConfigCount
-    }; // Config
 }; // NBody
 
 #endif

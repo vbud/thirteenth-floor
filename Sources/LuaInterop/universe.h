@@ -6,8 +6,6 @@ struct lua_State;
 int luaopen_universe(lua_State* L);
 
 int universe_particleCount(lua_State* L);
-int universe_scale(lua_State* L);
-int universe_vscale(lua_State* L);
 
 
 // metatable method for handling "points[index]"

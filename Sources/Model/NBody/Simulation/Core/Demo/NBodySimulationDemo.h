@@ -62,80 +62,60 @@ namespace NBody
     {
         namespace Demo
         {
-/*
             static const Params kParams[] =
             {
-                // time step, cluster scale, velocity Scale, softening, damping
-                // point size scale, x-rotation, y-rotation , view distance, configuration
+                // time step,       softening,      damping,        point size scale,
+                // x-rotation,      y-rotation ,    view distance
                 
-                { Scale::kTime * 0.25f,    1.0f,     1.0f,     0.025f,   1.0f,
-                    0.7f, 66.0f, 137.0f,    30.0f,  eConfigMWM31 },
+                {
+                    0.005f,         0.0921f,        0.93f,          0.9f,
+                    90.0f,          20.0f,          25.0f
+                },
                 
-                { Scale::kTime * 0.016f,   1.54f,    8.0f,     Scale::kSoftening * 0.1f,     1.0f,
-                    1.0f,   0.0f,    0.0f,  30.0f,  eConfigShell },
+                {
+                    0.003f,         0.1221f,        0.93f,          0.9f,
+                    90.0f,          20.0f,          15.0f
+                },
                 
-                { Scale::kTime * 0.0019f,  0.32f,    276.0f,   Scale::kSoftening * 1.0f,     1.0f,
-                    0.18f,  90.0f,   0.0f,  9.0f,   eConfigShell },
+                {
+                    0.005f,         0.30f,          0.40f,          0.18f,
+                    90.0f,          0.0f,           9.0f
+                },
                 
-                { Scale::kTime * 0.016f,   0.68f,    30.0f,    Scale::kSoftening * 0.1f,     1.0f,
-                    1.2f,   39.0f,   2.0f, 50.0f,  eConfigShell },
+                {
+                    0.016f,         0.1f,           1.0f,           1.2f,
+                    39.0f,          2.0f,           50.0f
+                },
                 
-                { Scale::kTime * 0.0006f,  0.16f,    1000.0f,  Scale::kSoftening * 1.0f,     1.0f,
-                    0.15f,  -83.0f,  10.0f, 5.0f,   eConfigShell },
+                {
+                    0.0006f,        1.0f,           1.0f,           0.15f,
+                    90.0f,          10.0f,          5.0f
+                },
                 
-                { Scale::kTime * 0.0016f,  0.32f,    272.0f,   Scale::kSoftening * 0.145f,   1.0f,
-                    0.1f,   0.0f,    0.0f,  4.15f,  eConfigShell },
+                {
+                    0.0016f,        0.145f,         1.0f,           0.1f,
+                    90.0f,          0.0f,           4.15f
+                },
                 
-                { Scale::kTime * 0.016f, 0.4f, 10.0f, Scale::kSoftening * 0.15f, 1.0f,
-                    1.0f,   0.0f,    0.0f,  50.0f,  eConfigShell },
+                {
+                    0.016f,         0.15f,          1.0f,            1.0f,
+                    90.0f,          0.0f,           50.0f
+                },
                 
-                { Scale::kTime * 0.008f,   0.18f,    5.0f,    Scale::kSoftening * 0.09f,     0.99f,
-                    1.2f,   39.0f,   2.0f, 40.0f,  eConfigShell },
+                {
+                    0.008f,         0.09f,          0.89f,          1.2f,
+                    90.0f,          2.0f,           30.0f
+                },
                 
-                { Scale::kTime * 0.005f,   0.48f,    13.0f,    Scale::kSoftening * 0.21f,     0.93f,
-                    0.9f,   -39.0f,   20.0f, 30.0f,  eConfigShell },
+                {
+                    0.005f,         0.0921f,        0.93f,          5.1f,
+                    90.0f,          20.0f,          25.0f
+                },
                 
-                { Scale::kTime * 0.009f,   0.38f,    5.0f,    Scale::kSoftening * 0.12f,     0.96f,
-                    1.2f,   39.0f,   20.0f, 40.0f,  eConfigShell },
-
-            };
- */
-            
-            
-            static const Params kParams[] =
-            {
-                // time step, cluster scale, velocity Scale, softening, damping
-                // point size scale, x-rotation, y-rotation , view distance, configuration
-                
-                { Scale::kTime * 0.005f,   0.48f,    14.0f,    Scale::kSoftening * 0.0921f,     0.93f,
-                    0.9f,   90.0f,   20.0f, 25.0f,  eConfigShell },
-                
-                { Scale::kTime * 0.003f,   3.48f,    15.0f,    Scale::kSoftening * 0.1221f,     0.93f,
-                    0.9f,   90.0f,   20.0f, 15.0f,  eConfigShell },
-                
-                { Scale::kTime * 0.005f,  1.32f,    12.0f,   Scale::kSoftening * 0.30f,     0.40f,
-                    0.18f,  90.0f,   0.0f,  9.0f,   eConfigShell },
-                
-                { Scale::kTime * 0.016f,   0.68f,    12.0f,    Scale::kSoftening * 0.1f,     1.0f,
-                    1.2f,   39.0f,   2.0f, 50.0f,  eConfigShell },
-                
-                { Scale::kTime * 0.0006f,  0.16f,    10.0f,  Scale::kSoftening * 1.0f,     1.0f,
-                    0.15f,  90.0f,  10.0f, 5.0f,   eConfigShell },
-                
-                { Scale::kTime * 0.0016f,  0.32f,    27.0f,   Scale::kSoftening * 0.145f,   1.0f,
-                    0.1f,   90.0f,    0.0f,  4.15f,  eConfigShell },
-                
-                { Scale::kTime * 0.016f, 0.4f, 10.0f, Scale::kSoftening * 0.15f, 1.0f,
-                    1.0f,   90.0f,    0.0f,  50.0f,  eConfigShell },
-                
-                { Scale::kTime * 0.008f,   1.18f,    5.0f,    Scale::kSoftening * 0.09f,     0.89f,
-                    1.2f,   90.0f,   2.0f, 30.0f,  eConfigShell },
-                
-                { Scale::kTime * 0.005f,   1.48f,    13.0f,    Scale::kSoftening * 0.0921f,     0.93f,
-                    0.9f,   90.0f,   20.0f, 25.0f,  eConfigShell },
-                
-                { Scale::kTime * 0.0021f,   6.78f,    6.0f,    Scale::kSoftening * 0.002215462f,     0.97f,
-                    1.2f,   90.0f,   00.0f, 30.0f,  eConfigShell },
+                {
+                    0.0021f,        0.002215462f,   0.97f,          1.2f,
+                    90.0f,          0.0f,           30.0f
+                }
                 
             };
             

@@ -65,15 +65,12 @@ namespace NBody
         struct Params
         {
             GLfloat  mnTimeStamp;
-            GLfloat  mnClusterScale;
-            GLfloat  mnVelocityScale;
             GLfloat  mnSoftening;
             GLfloat  mnDamping;
             GLfloat  mnPointSize;
             GLfloat  mnRotateX;
             GLfloat  mnRotateY;
             GLfloat  mnViewDistance;
-            Config   mnConfig;
         }; // Params
     } // Simulation
 } // NBody

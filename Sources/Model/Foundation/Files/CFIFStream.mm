@@ -248,7 +248,8 @@ CF::IFStreamRef CF::IFStreamCreate(const std::string& pathname)
 } // CF::IFStreamCreate
 
 CF::IFStreamRef CF::IFStreamCreate(CFStringRef pName,
-                                   CFStringRef pExt)
+                                   CFStringRef pExt,
+                                   std::string* outFullpath)
 {
     CF::IFStreamRef pStream = NULL;
     
@@ -290,6 +291,10 @@ CF::IFStreamRef CF::IFStreamCreate(CFStringRef pName,
                         
                         if(CFStringGetCString(pPathname, pBuffer, nLength+1, kCFStringEncodingASCII))
                         {
+                            if (outFullpath) {
+                                outFullpath->clear();
+                                outFullpath->append(pBuffer);
+                            }
                             pStream = CFIFStreamCreateFromPath(pBuffer);
                         } // if
                         
@@ -340,3 +345,8 @@ const char* CF::IFStreamGetBuffer(const CF::IFStreamRef pStream)
 {
 	return (pStream != NULL) ? pStream->mpBuffer : NULL;
 } // CF::IFStreamGetBuffer
+
+size_t CF::IFStreamGetSize(const IFStreamRef pStream)
+{
+    return (pStream != NULL) ? pStream->mnLength : 0;
+}

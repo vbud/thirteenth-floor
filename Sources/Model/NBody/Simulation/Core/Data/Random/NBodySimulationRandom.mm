@@ -90,9 +90,12 @@ unsigned int gParticleCount;
 #pragma mark -
 #pragma mark Private - Utilities
 
-void Data::Random::acquire(GLfloat* pPosition,
+bool Data::Random::acquire(GLfloat* pPosition,
                            GLfloat* pVelocity)
 {
+    if (!pPosition || !pVelocity)
+        return false;
+    
     // set our global points and velocity pointers, etc.
     gPoints = pPosition;
     gVelocities = pVelocity;
@@ -171,6 +174,7 @@ void Data::Random::acquire(GLfloat* pPosition,
         default:
             break;
     }
+    return true;
 } // acquire
 
 #pragma mark -
@@ -198,20 +202,3 @@ Data::Random::~Random()
 {
     mnBodies   = 0;
 } // Destructor
-
-
-#pragma mark -
-#pragma mark Public - Operators
-
-bool Data::Random::operator()(GLfloat *pPosition,
-                              GLfloat *pVelocity)
-{
-    bool bSuccess = (pPosition != NULL) && (pVelocity != NULL);
-    
-    if(bSuccess)
-    {
-        acquire(pPosition, pVelocity);
-    } // if
-    
-    return bSuccess;
-} // operator()

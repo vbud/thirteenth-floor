@@ -78,10 +78,7 @@ namespace NBody
                 
                 virtual ~Random();
 
-                bool operator()(GLfloat *pPosition, GLfloat *pVelocity);
-            
-            private:
-                void acquire(GLfloat *pPosition, GLfloat *pVelocity);
+                bool acquire(GLfloat *pPosition, GLfloat *pVelocity);
                 
             private:
                 size_t   mnBodies;

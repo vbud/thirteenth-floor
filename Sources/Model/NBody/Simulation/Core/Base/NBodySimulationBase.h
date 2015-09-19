@@ -80,14 +80,6 @@ namespace NBody
             virtual GLint reset()     = 0;
             virtual void  step()      = 0;
             virtual void  terminate() = 0;
-            
-            virtual GLint positionInRange(GLfloat *pDst) = 0;
-            
-            virtual GLint position(GLfloat *pDst) = 0;
-            virtual GLint velocity(GLfloat *pDst) = 0;
-            
-            virtual GLint setPosition(const GLfloat * const pSrc) = 0;
-            virtual GLint setVelocity(const GLfloat * const pSrc) = 0;
                         
             void start(const bool& paused=true);
             void stop();

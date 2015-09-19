@@ -96,7 +96,7 @@ void Data::Random::acquire(GLfloat* pPosition,
     // set our global points and velocity pointers, etc.
     gPoints = pPosition;
     gVelocities = pVelocity;
-    gParticleCount = mnBodies;
+    gParticleCount = static_cast<unsigned int>(mnBodies);
     
     std::string fullpath;
     CF::IFStreamRef pStream = CF::IFStreamCreate(CFSTR("bang"), CFSTR("lua"), &fullpath);

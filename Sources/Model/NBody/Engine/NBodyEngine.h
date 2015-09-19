@@ -91,13 +91,7 @@ namespace NBody
         void setActiveDemo(const GLuint& nActiveDemo);
         void setFrame(const CGRect& rFrame);
         
-        void setToReduce(const bool& bReduce);
-        
-        void setShowHUD(const bool& bShow);
-        void setShowDock(const bool& bShow);
-        
         void setClearColor(const GLfloat& nColor);
-        void setDockSpeed(const GLfloat& nSpeed);
         void setViewDistance(const GLfloat& nDistance);
         
     private:
@@ -110,21 +104,13 @@ namespace NBody
         
         void restart();
 
-        void renderStars();
-        void renderDock();
-        void renderHUD();
         void render();
 
         void nextDemo();
-        
-        void swapVisualizer();
 
     private:
         bool mbWaitingForData;
-        bool mbShowHUD;
-        bool mbShowDock;
         bool mbIsRotating;
-        bool mbReduce;
         
         
         Simulation::Mediator   *mpMediator;
@@ -137,13 +123,11 @@ namespace NBody
         GLfloat   mnHudPosition;
         GLfloat   mnClearColor;
         GLfloat   mnStarScale;
-        GLfloat   mnDockSpeed;
         GLsizei   mnWidowWidth;
         GLsizei   mnWidowHeight;
         
         CGSize    m_FrameSz;
         CGPoint   m_MousePt;
-        CGPoint   m_DockPt;
         CGPoint   m_RotationPt;
         CGRect    m_ButtonRt;
     }; // Engine

@@ -88,7 +88,7 @@ namespace NBody
 
     namespace Bodies
     {
-        const GLuint  kCount  = 65536;//16384;//32768;//65536;//kCountMax;
+        const GLuint  kCount  = 16384;//16384;//32768;//65536;//kCountMax;
     }; // Defaults
 
     namespace Star

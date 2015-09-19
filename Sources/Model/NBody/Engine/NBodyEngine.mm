@@ -92,22 +92,6 @@ void NBody::Engine::restart()
 #pragma mark -
 #pragma mark Private - Utilities - Renderers
 
-void NBody::Engine::renderStars()
-{
-    const GLfloat* pPosition = mpMediator->position();
-    
-    mpVisualizer->draw(pPosition);
-} // renderStars
-
-void NBody::Engine::renderHUD()
-{
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
-    {
-
-    }
-    glDisable(GL_BLEND);
-} // renderHUD
 
 void NBody::Engine::render()
 {
@@ -135,8 +119,9 @@ void NBody::Engine::render()
         
         glClear(GL_COLOR_BUFFER_BIT);
         
-        renderStars();
-        //renderHUD();
+        const GLfloat* pPosition = mpMediator->position();
+        
+        mpVisualizer->draw(pPosition);
         
         CGLFlushDrawable(CGLGetCurrentContext());
     } // else
@@ -153,18 +138,6 @@ void NBody::Engine::nextDemo()
     
     reset(mnActiveDemo);
 } // demo
-
-#pragma mark -
-#pragma mark Private - Utilities - Swapping
-
-void NBody::Engine::swapVisualizer()
-{
-    render();
-    
-    mbWaitingForData = true;
-    
-    mpVisualizer->reset(mnActiveDemo);
-} // swapVisualizer
 
 #pragma mark -
 #pragma mark Private - Utilities - Intervals
@@ -188,7 +161,7 @@ void NBody::Engine::sync(const bool& doSync)
 
 bool NBody::Engine::simulators(const GLuint& nBodies)
 {
-    mnBodies = (mbReduce) ? NBody::Bodies::kCount : nBodies;
+    mnBodies = nBodies;
     
     mpMediator = new NBody::Simulation::Mediator(m_ActiveParams, mnBodies);
     
@@ -206,7 +179,7 @@ void NBody::Engine::setDemo(const GLubyte& nCommand)
 {
     GLint demo = (nCommand - '0');
     
-    if(demo < NBody::Simulation::Demo::kParamsCount)
+    if(demo < NBody::Simulation::Demo::kParamsCount && demo >= 0)
     {
         mnActiveDemo = demo;
         
@@ -222,20 +195,16 @@ NBody::Engine::Engine(const GLfloat& nStarScale,
 {
     std::memset(&m_ActiveParams, 0x0, sizeof(NBody::Simulation::Params));
     
-    mbReduce          = false;
-    mbShowHUD         = true;
     mbWaitingForData  = true;
     mbIsRotating      = true;
     mnActiveDemo      = nActiveDemo;
     m_ActiveParams    = NBody::Simulation::Demo::kParams[mnActiveDemo];
     mnStarScale       = nStarScale;
-    mnDockSpeed       = NBody::Defaults::kSpeed;
     mnViewDistance    = 30.0f;
     mnClearColor      = 1.0f;
     mnWidowWidth      = GLsizei(NBody::Window::kWidth);
     mnWidowHeight     = GLsizei(NBody::Window::kHeight);
     m_FrameSz         = CGSizeMake(NBody::Window::kWidth, NBody::Window::kHeight);
-    m_DockPt          = CGPointMake(0.0f, (mbShowDock ? GLM::kHalfPi_f : 0.0f));
     m_MousePt         = CGPointMake(0.0f, 0.0f);
     m_RotationPt      = CGPointMake(0.0f, 0.0f);
     m_ButtonRt        = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
@@ -354,14 +323,6 @@ void NBody::Engine::run(const GLubyte& nCommand)
         case '9':
             setDemo(nCommand);
             break;
-            
-        case 'd':
-            mbShowDock = !mbShowDock;
-            break;
-            
-        case 'g':
-            swapVisualizer();
-            break;
     } // switch
 } // run
 
@@ -415,26 +376,10 @@ void NBody::Engine::setFrame(const CGRect& rFrame)
     } // if
 } // setFrame
 
-void NBody::Engine::setToReduce(const bool& bReduce)
-{
-    mbReduce = bReduce;
-} // setToReduce
-
-void NBody::Engine::setShowHUD(const bool& bShow)
-{
-    mbShowHUD     = bShow;
-    mnHudPosition = mbShowHUD ? GLM::kHalfPi_f : 0.0f;
-} // setShowHUD
-
 void NBody::Engine::setClearColor(const GLfloat& nColor)
 {
     mnClearColor = nColor;
 } // setClearColor
-
-void NBody::Engine::setDockSpeed(const GLfloat& nSpeed)
-{
-    mnDockSpeed = nSpeed;
-} // setDockSpeed
 
 void NBody::Engine::setViewDistance(const GLfloat& nDistance)
 {

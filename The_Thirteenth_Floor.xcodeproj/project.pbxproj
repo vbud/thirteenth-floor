@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F83C29511B81301A0095C5E6 /* bang.lua in Resources */ = {isa = PBXBuildFile; fileRef = F83C29501B81301A0095C5E6 /* bang.lua */; };
 		F83C29551B81350B0095C5E6 /* universe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F83C29541B81350B0095C5E6 /* universe.cpp */; };
+		F88477991BACEA2C002D72E4 /* vector.lua in Resources */ = {isa = PBXBuildFile; fileRef = F88477981BACEA2C002D72E4 /* vector.lua */; };
 		F8AC9ACF18C2FBA0005DC7B3 /* CGBitmap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 36E41B0718AEA6A4000AA534 /* CGBitmap.mm */; };
 		F8AC9AD018C2FBA0005DC7B3 /* CFIFStream.mm in Sources */ = {isa = PBXBuildFile; fileRef = 36663B9C1885F0EE00B02F82 /* CFIFStream.mm */; };
 		F8AC9AD118C2FBA0005DC7B3 /* CTFrame.mm in Sources */ = {isa = PBXBuildFile; fileRef = 367C1ED01899842D0083A3EE /* CTFrame.mm */; };
@@ -154,6 +155,7 @@
 		F83C29531B8134CA0095C5E6 /* universe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = universe.h; path = LuaInterop/universe.h; sourceTree = "<group>"; };
 		F83C29541B81350B0095C5E6 /* universe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = universe.cpp; path = LuaInterop/universe.cpp; sourceTree = "<group>"; };
 		F83C29571B8136770095C5E6 /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = lua/lua.h; sourceTree = "<group>"; };
+		F88477981BACEA2C002D72E4 /* vector.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vector.lua; path = Sources/scripts/vector.lua; sourceTree = SOURCE_ROOT; };
 		F8AC9B0A18C2FBA0005DC7B3 /* TheThirteenthFloor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheThirteenthFloor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F04F1818C2F3AD001F8510 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		F8F04F1918C2F3AD001F8510 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -749,6 +751,7 @@
 			isa = PBXGroup;
 			children = (
 				F83C29501B81301A0095C5E6 /* bang.lua */,
+				F88477981BACEA2C002D72E4 /* vector.lua */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				F8AC9AFB18C2FBA0005DC7B3 /* nbody.gsh in Resources */,
 				F8AC9AFC18C2FBA0005DC7B3 /* nbody.vsh in Resources */,
 				F8AC9AFD18C2FBA0005DC7B3 /* star.fsh in Resources */,
+				F88477991BACEA2C002D72E4 /* vector.lua in Resources */,
 				F8AC9AFE18C2FBA0005DC7B3 /* star.vsh in Resources */,
 				F8AC9B0418C2FBA0005DC7B3 /* GalaxyIcon.icns in Resources */,
 				F8AC9B0518C2FBA0005DC7B3 /* star.png in Resources */,

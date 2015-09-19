@@ -145,8 +145,6 @@ static bool CFIFStreamOpen(const std::string& pathname,
     pStream->m_Stream.open(path,
                            std::ios::in|std::ios::binary|std::ios::ate);
     
-    auto state = pStream->m_Stream.failbit;
-    
     return pStream->m_Stream.is_open();
 } // CF::IFStreamOpen
 

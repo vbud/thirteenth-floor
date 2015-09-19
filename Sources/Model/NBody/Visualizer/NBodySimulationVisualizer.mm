@@ -312,17 +312,18 @@ void Visualizer::render(const GLfloat *pPosition)
                     
                     mpGausssian->enable();
                     
+                    /*
                     // 150 - 1
                     // 300 - 50
                     float cloudScale = 300.0f - ((1.0f - (zoom / 150.0f)) * 250.0f);
-                    /*std::cout << " Cloud-scale: "
+                    std::cout << " Cloud-scale: "
                     << cloudScale
                     << std::endl;
                      
                     glUniform1f(m_Graphic[eNBodyLocPointSize],
                                 cloudScale * mpParams[mnActiveDemo].mnPointSize);
                     
-                    /*if(mnActiveDemo != 0)
+                    if(mnActiveDemo != 0)
                     {
                         //const float purpCloudRatio = 0.1f;
                         //const float blueCloudRatio = 0.1f;

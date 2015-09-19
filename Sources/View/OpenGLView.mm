@@ -187,11 +187,6 @@
                                [NSNumber numberWithBool:mbFullscreen],        @"fullscreen",
                                [NSNumber numberWithInt:mnInitDemo],           @"initDemo",
                                [NSNumber numberWithFloat:mnStarScale],        @"starScale",
-                               [NSNumber numberWithBool:mbShowHUD],           @"showHUD",
-                               [NSNumber numberWithBool:mbShowUpdatesMeter],  @"showUpdates",
-                               [NSNumber numberWithBool:mbShowFramesMeter],   @"showFramerate",
-                               [NSNumber numberWithBool:mbShowPerfMeter],     @"showPref",
-                               [NSNumber numberWithBool:mbShowDock],          @"showDock",
                                nil];
         
         if(pPrefs)
@@ -239,26 +234,6 @@
         obj = [pUserDefaults objectForKey:@"starScale"];
         
         mnStarScale = obj ? [obj floatValue] : 1.0f;
-        
-        obj = [pUserDefaults objectForKey:@"showHUD"];
-        
-        mbShowHUD = obj ? [obj boolValue] : YES;
-        
-        obj = [pUserDefaults objectForKey:@"showUpdates"];
-        
-        mbShowUpdatesMeter = obj ? [obj boolValue] : NO;
-        
-        obj = [pUserDefaults objectForKey:@"showFramerate"];
-        
-        mbShowFramesMeter = obj ? [obj boolValue] : NO;
-        
-        obj = [pUserDefaults objectForKey:@"showPref"];
-        
-        mbShowPerfMeter = obj ? [obj boolValue] : YES;
-        
-        obj = [pUserDefaults objectForKey:@"showDock"];
-        
-        mbShowDock = obj ? [obj boolValue] : YES;
     } // if
     
     [self savePrefs:pBundleID];
@@ -268,9 +243,9 @@
         mnInitDemo = 0;
     } // if
     
-    if(mnInitDemo > 6)
+    if(mnInitDemo > 9)
     {
-        mnInitDemo = 6;
+        mnInitDemo = 9;
     } // if
 } // preparePrefs
 

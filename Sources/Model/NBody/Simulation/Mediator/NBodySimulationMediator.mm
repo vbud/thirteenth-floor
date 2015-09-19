@@ -135,8 +135,6 @@ NBody::Simulation::Mediator::Mediator(const NBody::Simulation::Params& rParams,
 // Delete alll simulators
 NBody::Simulation::Mediator::~Mediator()
 {
-    GLuint i;
-    
     delete mpSimulator;
     mpSimulator = nullptr;
     

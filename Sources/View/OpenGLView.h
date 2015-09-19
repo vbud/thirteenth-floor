@@ -58,12 +58,6 @@
     GLfloat mnStarScale;
     
     BOOL mbFullscreen;
-    
-    BOOL mbShowHUD;
-    BOOL mbShowDock;
-    BOOL mbShowUpdatesMeter;
-    BOOL mbShowFramesMeter;
-    BOOL mbShowPerfMeter;
 
     NSDictionary    *mpOptions;
 	NSOpenGLContext *mpContext;

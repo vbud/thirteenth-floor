@@ -75,13 +75,6 @@ namespace NBody
             void  step();
             void  terminate();
             
-            GLint positionInRange(GLfloat *pDst);
-            
-            GLint position(GLfloat *pDst);
-            GLint velocity(GLfloat *pDst);
-            
-            GLint setPosition(const GLfloat * const pSrc);
-            GLint setVelocity(const GLfloat * const pSrc);
             
         private:
             GLint setup(const String& options);

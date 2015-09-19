@@ -110,7 +110,7 @@ bool Data::Random::acquire(GLfloat* pPosition,
         << ">> N-body Simulation: "
         << " could not open 'bang.lua'"
         << std::endl;
-        return;
+        return false;
     } // if
     
     size_t sz = CF::IFStreamGetSize(pStream);

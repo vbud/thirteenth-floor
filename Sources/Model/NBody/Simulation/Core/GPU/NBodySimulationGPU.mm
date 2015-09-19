@@ -513,7 +513,7 @@ GLint NBody::Simulation::GPU::restart()
     
     if(mpKernel != NULL)
     {       
-        if(mConductor.aquire(mpHostPosition, mpHostVelocity))
+        if(mConductor.acquire(mpHostPosition, mpHostVelocity))
         {
             const size_t size = 4 * GLM::Size::kFloat * mnBodyCount;
             

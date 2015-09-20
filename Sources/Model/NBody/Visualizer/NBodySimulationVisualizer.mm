@@ -231,6 +231,10 @@ void Visualizer::update()
 #pragma mark -
 #pragma mark Private - Utilities - Rendering
 
+typedef std::vector<int> StarCountHistory;
+
+StarCountHistory history;
+
 void Visualizer::render(const GLfloat *pPosition)
 {
     glViewport(0, 0, m_Bounds[0], m_Bounds[1]);
@@ -285,6 +289,10 @@ void Visualizer::render(const GLfloat *pPosition)
                     mpTexture->enable();
                     
                     int totalStars = m_Graphic[eNBodyBufferCount];
+                    if (totalStars > 65536) {
+                        totalStars = 65536;
+                    }
+                    
                     const float whiteRatio = 0.1f;
                     const float blueRatio = 0.5f;
                     const float redRatio = 0.4;
@@ -342,7 +350,7 @@ void Visualizer::render(const GLfloat *pPosition)
                         //glColor3f(0.018f * 5.0f, 0.032f * 5.0f, 0.031f * 5.0f);
                         //glDrawArrays(GL_POINTS, 128, 64);
                     } // if
-                    else*/
+                    else
                     {
                         GLuint step = m_Graphic[eNBodyBufferCount] / 5;
                         
@@ -374,7 +382,7 @@ void Visualizer::render(const GLfloat *pPosition)
                             glDrawArrays( GL_POINTS, i, 1 );
                         } // for
                     } // else
-                    
+                    */
                     glBindTexture(GL_TEXTURE_2D, 0);
                     
                     glColor3f(1.0f, 1.0f, 1.0f);

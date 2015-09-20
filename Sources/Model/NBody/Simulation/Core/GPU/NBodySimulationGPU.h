@@ -53,6 +53,7 @@
 #import <OpenCL/OpenCL.h>
 
 #import "NBodySimulationBase.h"
+#import "NBodySimulationRandom.h"
 
 #ifdef __cplusplus
 
@@ -99,6 +100,7 @@ namespace NBody
             cl_mem            mpDevicePosition[2];
             cl_mem            mpDeviceVelocity[2];
             cl_mem            mpBodyRangeParams;
+            Data::Random      mConductor;
         }; // GPU
     } // Simulation
 } // NBody

@@ -149,8 +149,6 @@ namespace NBody
             pthread_t           m_Thread;
             pthread_mutex_t     m_RunLock;
             pthread_mutexattr_t m_RunAttrib;
-            pthread_mutex_t     m_ClockLock;
-            pthread_mutexattr_t m_ClockAttrib;
             
             
             GLdouble            mnYear;

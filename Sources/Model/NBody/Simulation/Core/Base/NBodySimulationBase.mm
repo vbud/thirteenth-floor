@@ -123,11 +123,6 @@ NBody::Simulation::Base::Base(const size_t& nbodies,
         // giga (or tera) flops performance numbers.
         mnDelta = GLdouble(mnCardinality) * hw.scale();
         
-        pthread_mutexattr_init(&m_ClockAttrib);
-        pthread_mutexattr_settype(&m_ClockAttrib, PTHREAD_MUTEX_RECURSIVE);
-        
-        pthread_mutex_init(&m_ClockLock, &m_ClockAttrib);
-        
         pthread_mutexattr_init(&m_RunAttrib);
         pthread_mutexattr_settype(&m_RunAttrib, PTHREAD_MUTEX_RECURSIVE);
         
@@ -137,9 +132,6 @@ NBody::Simulation::Base::Base(const size_t& nbodies,
 
 NBody::Simulation::Base::~Base()
 {
-    pthread_mutexattr_destroy(&m_ClockAttrib);
-    pthread_mutex_destroy(&m_ClockLock);
-    
     pthread_mutexattr_destroy(&m_RunAttrib);
     pthread_mutex_destroy(&m_RunLock);
     
@@ -299,11 +291,7 @@ GLfloat *NBody::Simulation::Base::data()
 
 void NBody::Simulation::Base::run()
 {
-    pthread_mutex_lock(&m_ClockLock);
-    {
-        initialize(m_Options);
-    }
-    pthread_mutex_unlock(&m_ClockLock);
+    initialize(m_Options);
     
     while(mbKeepAlive)
     {
@@ -311,7 +299,6 @@ void NBody::Simulation::Base::run()
         {
             if(mbStop)
             {
-                pthread_mutex_unlock(&m_ClockLock);
                 pthread_mutex_unlock(&m_RunLock);
                 
                 return;
@@ -319,20 +306,12 @@ void NBody::Simulation::Base::run()
             
             if (mbReload)
             {
-                pthread_mutex_lock(&m_ClockLock);
-                {
-                    reset();
-                }
-                pthread_mutex_unlock(&m_ClockLock);
+                reset();
                 
                 mbReload = false;
             } // if
             
-            pthread_mutex_lock(&m_ClockLock);
-            {
-                step();
-            }
-            pthread_mutex_unlock(&m_ClockLock);
+            step();
         }
         pthread_mutex_unlock(&m_RunLock);
                 
@@ -342,11 +321,7 @@ void NBody::Simulation::Base::run()
         std::this_thread::yield();
     } // while
     
-    pthread_mutex_lock(&m_ClockLock);
-    {
-        terminate();
-    }
-    pthread_mutex_unlock(&m_ClockLock);
+    terminate();
 } // run
 
 const GLdouble& NBody::Simulation::Base::year() const

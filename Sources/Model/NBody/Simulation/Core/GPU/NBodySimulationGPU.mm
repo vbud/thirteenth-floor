@@ -512,10 +512,8 @@ GLint NBody::Simulation::GPU::restart()
     GLint err = CL_INVALID_KERNEL;
     
     if(mpKernel != NULL)
-    {
-        NBody::Simulation::Data::Random rand(mnBodyCount, m_ActiveParams);
-        
-        if(rand(mpHostPosition, mpHostVelocity))
+    {       
+        if(mConductor.acquire(mpHostPosition, mpHostVelocity))
         {
             const size_t size = 4 * GLM::Size::kFloat * mnBodyCount;
             
@@ -571,6 +569,7 @@ NBody::Simulation::GPU::GPU(const size_t& nbodies,
                             const NBody::Simulation::Params& params,
                             const GLuint& index)
 : NBody::Simulation::Base(nbodies, params)
+, mConductor(nbodies, params)
 {
     mnDeviceCount = 1;
     mnDeviceIndex = index;
